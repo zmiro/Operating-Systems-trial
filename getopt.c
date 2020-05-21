@@ -1,4 +1,3 @@
-// Input:  thisCompiledCode desiredFileName -n -f
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -7,29 +6,34 @@
 #include <getopt.h>
 
 int main(int argc, char *argv[]){
-printf("hello\n");
-
 if (argc > 0) {
-        printf("%s \n", argv[1]);
+        printf(" the selected file is: %s \n", argv[1]);
 
 }
-
     int opt;
-    while ((opt = getopt(argc, argv, "nf")) != -1) {
+    int cvalue;
+
+  // a colon (:) after the command like n: means n needs an argument
+  //  if command has an argument, it is stored in the variable optarg
+  // if there are two colons (::) then the argument is optional
+        
+  while ((opt = getopt(argc, argv, "f:n")) != -1) {
 
         switch (opt) {
 
             case 'n':
-               printf("You typed n \n");
+               printf("You typed option -n \n");
                 break;
 
             case 'f':
-                printf("You typed f \n");
+                printf("You typed option -f with argument: ");
+                cvalue = atoi (optarg);
+                printf("%d \n", cvalue);
                 break;
 
            default:
-                //printf("Command not listed");
             break;
+                        
         }// close switch
     }// close while
 
